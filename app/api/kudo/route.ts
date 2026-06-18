@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getValidAccessToken, unauthorizedRedirect } from "@/lib/strava-token";
+import { cookies } from "next/headers";
 
 export async function POST(req: NextRequest) {
-  const token = await getValidAccessToken();
-  if (!token) return unauthorizedRedirect();
+  const cookieStore = await cookies();
+  const token = cookieStore.get("strava_access_token")?.value;
+  if (!token) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
   const { activityIds } = await req.json() as { activityIds: number[] };
 
