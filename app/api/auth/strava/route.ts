@@ -8,7 +8,7 @@ export async function GET() {
   stravaAuthUrl.searchParams.set("client_id", clientId!);
   stravaAuthUrl.searchParams.set("redirect_uri", redirectUri);
   stravaAuthUrl.searchParams.set("response_type", "code");
-  stravaAuthUrl.searchParams.set("approval_prompt", "auto");
+  stravaAuthUrl.searchParams.set("approval_prompt", "force");
   stravaAuthUrl.searchParams.set("scope", "read,activity:read,activity:write");
 
   return NextResponse.redirect(stravaAuthUrl.toString());
