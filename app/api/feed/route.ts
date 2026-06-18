@@ -17,8 +17,9 @@ export async function GET(req: NextRequest) {
   );
 
   if (!res.ok) {
+    const body = await res.text();
     return NextResponse.json(
-      { error: "Failed to fetch feed" },
+      { error: "Failed to fetch feed", status: res.status, stravaError: body },
       { status: res.status }
     );
   }
