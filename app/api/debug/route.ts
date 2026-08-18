@@ -13,7 +13,6 @@ export async function GET() {
   const athleteRes = await fetch("https://www.strava.com/api/v3/athlete", {
     headers: { Authorization: `Bearer ${token}` },
   });
-  const athleteBody = await athleteRes.text();
 
   // Try own activities (requires activity:read scope)
   const ownRes = await fetch("https://www.strava.com/api/v3/athlete/activities?per_page=1", {
